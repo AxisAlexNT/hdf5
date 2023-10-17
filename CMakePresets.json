@@ -9,7 +9,7 @@
       "hidden": true,
       "inherits": "ci-base",
       "cacheVariables": {
-        "HDF5_ALLOW_EXTERNAL_SUPPORT": "NO",
+        "HDF5_ALLOW_EXTERNAL_SUPPORT": "TGZ",
         "TGZPATH": {"type": "STRING", "value": "${sourceParentDir}/temp"}
       }
     },
@@ -85,7 +85,8 @@
       "cacheVariables": {
           "H5PL_VERS_MAJOR": "1",
           "H5PL_VERS_MINOR": "10",
-          "H5PL_VERS_RELEASE": "11"
+          "H5PL_VERS_RELEASE": "11",
+	  "HDF5_ENABLE_PLUGIN_SUPPORT": "ON"
       }
     },
     {
@@ -112,7 +113,7 @@
     {
       "name": "ci-StdShar",
       "hidden": true,
-      "inherits": ["ci-StdCompression", "ci-StdExamples"],
+      "inherits": ["ci-StdCompression", "ci-StdExamples", "ci-StdPlugins"],
       "cacheVariables": {
         "HDF_PACKAGE_NAMESPACE": {"type": "STRING", "value": "hdf5::"},
         "HDF5_INSTALL_MOD_FORTRAN": "NO",
