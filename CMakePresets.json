@@ -9,7 +9,7 @@
       "hidden": true,
       "inherits": "ci-base",
       "cacheVariables": {
-        "HDF5_ALLOW_EXTERNAL_SUPPORT": "NO",
+        "HDF5_ALLOW_EXTERNAL_SUPPORT": "YES",
         "TGZPATH": {"type": "STRING", "value": "${sourceParentDir}/temp"}
       }
     },
@@ -119,7 +119,9 @@
         "HDF5_BUILD_GENERATORS": "ON",
         "HDF5_ENABLE_ALL_WARNINGS": "ON",
         "HDF5_MINGW_STATIC_GCC_LIBS": "ON",
-        "HDF_TEST_EXPRESS": "2"
+        "HDF_TEST_EXPRESS": "2",
+	"HDF5_ALLOW_EXTERNAL_SUPPORT": "GIT",
+	"PLUGIN_USE_EXTERNAL": "1"
       }
     },
     {
