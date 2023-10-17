@@ -12,8 +12,8 @@
 
 include (ExternalProject)
 #option (HDF5_ALLOW_EXTERNAL_SUPPORT "Allow External Library Building (NO GIT TGZ)" "NO")
-set (HDF5_ALLOW_EXTERNAL_SUPPORT "NO" CACHE STRING "Allow External Library Building (NO GIT TGZ)")
-set_property (CACHE HDF5_ALLOW_EXTERNAL_SUPPORT PROPERTY STRINGS NO GIT TGZ)
+set (HDF5_ALLOW_EXTERNAL_SUPPORT "GIT" CACHE STRING "Allow External Library Building (NO GIT TGZ)")
+set_property (CACHE HDF5_ALLOW_EXTERNAL_SUPPORT PROPERTY STRINGS GIT NO TGZ)
 if (HDF5_ALLOW_EXTERNAL_SUPPORT MATCHES "GIT" OR HDF5_ALLOW_EXTERNAL_SUPPORT MATCHES "TGZ")
   option (PLUGIN_USE_EXTERNAL "Use External Library Building for filter PLUGIN" 1)
   if (HDF5_ALLOW_EXTERNAL_SUPPORT MATCHES "GIT")
@@ -36,7 +36,7 @@ endif ()
 #-----------------------------------------------------------------------------
 # Option for PLUGIN support
 #-----------------------------------------------------------------------------
-option (HDF5_ENABLE_PLUGIN_SUPPORT "Enable PLUGIN Filters" OFF)
+option (HDF5_ENABLE_PLUGIN_SUPPORT "Enable PLUGIN Filters" ON)
 if (HDF5_ENABLE_PLUGIN_SUPPORT)
   if (NOT PLUGIN_USE_EXTERNAL)
     find_package (PLUGIN NAMES ${PLUGIN_PACKAGE_NAME}${HDF_PACKAGE_EXT})
