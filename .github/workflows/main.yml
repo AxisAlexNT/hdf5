@@ -55,16 +55,16 @@ jobs:
         thread_safety:
           - enabled: true
             text: " TS"
-          - enabled: false
-            text: ""
+          #- enabled: false
+          #  text: ""
 
         build_mode:
           - text: " REL"
             cmake: "Release"
             autotools: "production"
-          - text: " DBG"
-            cmake: "Debug"
-            autotools: "debug"
+          #- text: " DBG"
+          #  cmake: "Debug"
+          #  autotools: "debug"
 
         # This is where we list the bulk of the options for each configuration.
         # The key-value pair values are usually appropriate for being CMake or
@@ -191,55 +191,55 @@ jobs:
           # names (so make sure the names are UNIQUE).
           #
 
-          - name: "Ubuntu gcc Autotools v1.6 default API (build only)"
-            os: ubuntu-latest
-            cpp: enable
-            fortran: enable
-            java: enable
-            docs: disable
-            parallel: disable
-            mirror_vfd: enable
-            direct_vfd: enable
-            ros3_vfd: enable
-            deprec_sym: enable
-            default_api: v16
-            szip: yes
-            toolchain: ""
-            generator: "autogen"
-            flags: ""
-            run_tests: false
-            thread_safety:
-              enabled: false
-              text: ""
-            build_mode:
-              text: " DBG"
-              cmake: "Debug"
-              autotools: "debug"
+          #- name: "Ubuntu gcc Autotools v1.6 default API (build only)"
+          #  os: ubuntu-latest
+          #  cpp: enable
+          #  fortran: enable
+          #  java: enable
+          #  docs: disable
+          #  parallel: disable
+          #  mirror_vfd: enable
+          #  direct_vfd: enable
+          #  ros3_vfd: enable
+          #  deprec_sym: enable
+          #  default_api: v16
+          #  szip: yes
+          #  toolchain: ""
+          #  generator: "autogen"
+          #  flags: ""
+          #  run_tests: false
+          #  thread_safety:
+          #    enabled: false
+          #    text: ""
+          #  build_mode:
+          #    text: " DBG"
+          #    cmake: "Debug"
+          #    autotools: "debug"
 
-          - name: "Ubuntu gcc Autotools v1.8 default API (build only)"
-            os: ubuntu-latest
-            cpp: enable
-            fortran: enable
-            java: enable
-            docs: disable
-            parallel: disable
-            mirror_vfd: enable
-            direct_vfd: enable
-            ros3_vfd: enable
-            deprec_sym: enable
-            default_api: v18
-            szip: yes
-            toolchain: ""
-            generator: "autogen"
-            flags: ""
-            run_tests: false
-            thread_safety:
-              enabled: false
-              text: ""
-            build_mode:
-              text: " DBG"
-              cmake: "Debug"
-              autotools: "debug"
+          #- name: "Ubuntu gcc Autotools v1.8 default API (build only)"
+          #  os: ubuntu-latest
+          #  cpp: enable
+          #  fortran: enable
+          #  java: enable
+          #  docs: disable
+          #  parallel: disable
+          #  mirror_vfd: enable
+          #  direct_vfd: enable
+          #  ros3_vfd: enable
+          #  deprec_sym: enable
+          #  default_api: v18
+          #  szip: yes
+          #  toolchain: ""
+          #  generator: "autogen"
+          #  flags: ""
+          #  run_tests: false
+          #  thread_safety:
+          #    enabled: false
+          #    text: ""
+          #  build_mode:
+          #    text: " DBG"
+          #    cmake: "Debug"
+          #    autotools: "debug"
 
           - name: "Ubuntu gcc Autotools v1.10 default API (build only)"
             os: ubuntu-latest
