@@ -36,7 +36,7 @@ endif ()
 #-----------------------------------------------------------------------------
 # Option for PLUGIN support
 #-----------------------------------------------------------------------------
-option (HDF5_ENABLE_PLUGIN_SUPPORT "Enable PLUGIN Filters" ON)
+option (HDF5_ENABLE_PLUGIN_SUPPORT "Enable PLUGIN Filters" OFF)
 if (HDF5_ENABLE_PLUGIN_SUPPORT)
   if (NOT PLUGIN_USE_EXTERNAL)
     find_package (PLUGIN NAMES ${PLUGIN_PACKAGE_NAME}${HDF_PACKAGE_EXT})
