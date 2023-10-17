@@ -59,8 +59,9 @@ jobs:
       - name: Run ctest (Windows)
         run: |
           cd "${{ runner.workspace }}/hdf5/hdfsrc"
+          bash ./patch_jhdf5.sh
           cmake --workflow --preset=ci-StdShar-MSVC --fresh
-        shell: bash
+          shell: bash
 
       - name: Publish binary (Windows)
         id: publish-ctest-binary

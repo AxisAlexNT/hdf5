@@ -56,6 +56,7 @@ jobs:
 
       - name: Zip Folder
         run: |
+              ./hdfsrc/patch_jhdf5.sh
               zip -r ${{ steps.set-file-base.outputs.FILE_BASE }}.zip ./hdfsrc
               tar -zcvf ${{ steps.set-file-base.outputs.FILE_BASE }}.tar.gz ./hdfsrc
 
