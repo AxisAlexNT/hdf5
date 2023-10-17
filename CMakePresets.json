@@ -85,7 +85,8 @@
       "cacheVariables": {
           "H5PL_VERS_MAJOR": "1",
           "H5PL_VERS_MINOR": "10",
-          "H5PL_VERS_RELEASE": "11"
+          "H5PL_VERS_RELEASE": "11",
+	  "HDF5_ENABLE_PLUGIN_SUPPORT": "ON"
       }
     },
     {
@@ -112,16 +113,14 @@
     {
       "name": "ci-StdShar",
       "hidden": true,
-      "inherits": ["ci-StdCompression", "ci-StdPlugins", "ci-StdExamples"],
+      "inherits": ["ci-StdCompression", "ci-StdExamples", "ci-StdPlugins"],
       "cacheVariables": {
         "HDF_PACKAGE_NAMESPACE": {"type": "STRING", "value": "hdf5::"},
         "HDF5_INSTALL_MOD_FORTRAN": "NO",
         "HDF5_BUILD_GENERATORS": "ON",
         "HDF5_ENABLE_ALL_WARNINGS": "ON",
         "HDF5_MINGW_STATIC_GCC_LIBS": "ON",
-        "HDF_TEST_EXPRESS": "2",
-	"HDF5_ALLOW_EXTERNAL_SUPPORT": "GIT",
-	"PLUGIN_USE_EXTERNAL": "1"
+        "HDF_TEST_EXPRESS": "2"
       }
     },
     {
