@@ -60,7 +60,7 @@ jobs:
         run: |
           cd "${{ runner.workspace }}/hdf5/hdfsrc"
           bash ./patch_jhdf5.sh
-          cmake --workflow --preset=ci-StdShar-MSVC --fresh
+          cmake --workflow --preset=gh-StdShar-MSVC --fresh
         shell: bash
 
       - name: Publish binary (Windows)
@@ -123,7 +123,7 @@ jobs:
       - name: Run ctest (Linux)
         run: |
           cd "${{ runner.workspace }}/hdf5/hdfsrc"
-          cmake --workflow --preset=ci-StdShar-GNUC --fresh
+          cmake --workflow --preset=gh-StdShar-GNUC --fresh
         shell: bash
 
       - name: Publish binary (Linux)
