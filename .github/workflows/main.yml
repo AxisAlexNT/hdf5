@@ -115,182 +115,6 @@ jobs:
             generator: "-G Ninja"
             run_tests: true
 
-          # # Linux (Ubuntu) w/ gcc + Autotools
-          # #
-          # # Keep this identical to the CMake configs. Note the difference in
-          # # the values.
-          # - name: "Ubuntu gcc Autotools"
-          #   os: ubuntu-latest
-          #   cpp: enable
-          #   fortran: enable
-          #   java: enable
-          #   docs: disable
-          #   parallel: disable
-          #   mirror_vfd: enable
-          #   direct_vfd: enable
-          #   ros3_vfd: enable
-          #   deprec_sym: enable
-          #   default_api: v110
-          #   szip: yes
-          #   toolchain: ""
-          #   generator: "autogen"
-          #   flags: ""
-          #   run_tests: true
-
-          # # Parallel Linux (Ubuntu) w/ gcc + Autotools
-          # #
-          # # The GitHub runners are inadequate for running parallel HDF5 tests,
-          # # so we catch most issues in daily testing. What we have here is just
-          # # a compile check to make sure nothing obvious is broken.
-          # - name: "Ubuntu gcc Autotools parallel (build only)"
-          #   os: ubuntu-latest
-          #   cpp: disable
-          #   fortran: enable
-          #   java: disable
-          #   docs: disable
-          #   parallel: enable
-          #   mirror_vfd: disable
-          #   direct_vfd: disable
-          #   ros3_vfd: disable
-          #   deprec_sym: enable
-          #   default_api: v110
-          #   szip: yes
-          #   toolchain: ""
-          #   generator: "autogen"
-          #   flags: "CC=mpicc"
-          #   run_tests: false
-
-          # MacOS w/ Clang + CMake
-          #
-          # We could also build with the Autotools via brew installing them,
-          # but that seems unnecessary
-          - name: "MacOS Clang CMake"
-            os: macos-13
-            cpp: ON
-            fortran: OFF
-            java: ON
-            docs: OFF
-            libaecfc: ON
-            localaec: OFF
-            zlibfc: ON
-            localzlib: OFF
-            parallel: OFF
-            mirror_vfd: ON
-            direct_vfd: OFF
-            ros3_vfd: OFF
-            toolchain: "config/toolchain/clang.cmake"
-            generator: "-G Ninja"
-            run_tests: true
-
-
-          #
-          # SPECIAL AUTOTOOLS BUILDS
-          #
-          # These do not run tests and are not built into the matrix and instead
-          # become NEW configs as their name would clobber one of the matrix
-          # names (so make sure the names are UNIQUE).
-          #
-
-          #- name: "Ubuntu gcc Autotools v1.6 default API (build only)"
-          #  os: ubuntu-latest
-          #  cpp: enable
-          #  fortran: enable
-          #  java: enable
-          #  docs: disable
-          #  parallel: disable
-          #  mirror_vfd: enable
-          #  direct_vfd: enable
-          #  ros3_vfd: enable
-          #  deprec_sym: enable
-          #  default_api: v16
-          #  szip: yes
-          #  toolchain: ""
-          #  generator: "autogen"
-          #  flags: ""
-          #  run_tests: false
-          #  thread_safety:
-          #    enabled: false
-          #    text: ""
-          #  build_mode:
-          #    text: " DBG"
-          #    cmake: "Debug"
-          #    autotools: "debug"
-
-          #- name: "Ubuntu gcc Autotools v1.8 default API (build only)"
-          #  os: ubuntu-latest
-          #  cpp: enable
-          #  fortran: enable
-          #  java: enable
-          #  docs: disable
-          #  parallel: disable
-          #  mirror_vfd: enable
-          #  direct_vfd: enable
-          #  ros3_vfd: enable
-          #  deprec_sym: enable
-          #  default_api: v18
-          #  szip: yes
-          #  toolchain: ""
-          #  generator: "autogen"
-          #  flags: ""
-          #  run_tests: false
-          #  thread_safety:
-          #    enabled: false
-          #    text: ""
-          #  build_mode:
-          #    text: " DBG"
-          #    cmake: "Debug"
-          #    autotools: "debug"
-
-          # - name: "Ubuntu gcc Autotools v1.10 default API (build only)"
-          #   os: ubuntu-latest
-          #   cpp: enable
-          #   fortran: enable
-          #   java: enable
-          #   docs: disable
-          #   parallel: disable
-          #   mirror_vfd: enable
-          #   direct_vfd: enable
-          #   ros3_vfd: enable
-          #   deprec_sym: enable
-          #   default_api: v110
-          #   szip: yes
-          #   toolchain: ""
-          #   generator: "autogen"
-          #   flags: ""
-          #   run_tests: false
-          #   thread_safety:
-          #     enabled: false
-          #     text: ""
-          #   build_mode:
-          #     text: " DBG"
-          #     cmake: "Debug"
-          #     autotools: "debug"
-
-          # - name: "Ubuntu gcc Autotools no deprecated symbols (build only)"
-          #   os: ubuntu-latest
-          #   cpp: enable
-          #   fortran: enable
-          #   java: enable
-          #   docs: disable
-          #   parallel: disable
-          #   mirror_vfd: enable
-          #   direct_vfd: enable
-          #   ros3_vfd: enable
-          #   deprec_sym: disable
-          #   default_api: default
-          #   szip: yes
-          #   toolchain: ""
-          #   generator: "autogen"
-          #   flags: ""
-          #   run_tests: false
-          #   thread_safety:
-          #     enabled: false
-          #     text: ""
-          #   build_mode:
-          #     text: " DBG"
-          #     cmake: "Debug"
-          #     autotools: "debug"
-
     # Sets the job's name from the properties
     name: "${{ matrix.name }}${{ matrix.build_mode.text }}${{ matrix.thread_safety.text }}"
 
@@ -315,27 +139,27 @@ jobs:
       # libssl, etc. are needed for the ros3 VFD
       - name: Install Linux Dependencies
         run: |
-           sudo apt update
-           sudo apt-get install ninja-build doxygen graphviz
-           sudo apt install libssl3 libssl-dev libcurl4 libcurl4-openssl-dev
-           sudo apt install gcc-12 g++-12 gfortran-12
-           echo "CC=gcc-12" >> $GITHUB_ENV
-           echo "CXX=g++-12" >> $GITHUB_ENV
-           echo "FC=gfortran-12" >> $GITHUB_ENV
+            sudo apt update
+            sudo apt-get install ninja-build doxygen graphviz
+            sudo apt install libssl3 libssl-dev libcurl4 libcurl4-openssl-dev
+            sudo apt install gcc-12 g++-12 gfortran-12
+            echo "CC=gcc-12" >> $GITHUB_ENV
+            echo "CXX=g++-12" >> $GITHUB_ENV
+            echo "FC=gfortran-12" >> $GITHUB_ENV
         if: matrix.os == 'ubuntu-latest'
 
       # CMake gets libaec from fetchcontent
       - name: Install Autotools Dependencies (Linux)
         run: |
-           sudo apt install automake autoconf libtool libtool-bin
-           sudo apt install libaec0 libaec-dev
+            sudo apt install automake autoconf libtool libtool-bin
+            sudo apt install libaec0 libaec-dev
         if: (matrix.generator == 'autogen')
 
       - name: Install Autotools Dependencies (Linux, parallel)
         run: |
-           sudo apt install openmpi-bin openmpi-common mpi-default-dev
-           echo "CC=mpicc" >> $GITHUB_ENV
-           echo "FC=mpif90" >> $GITHUB_ENV
+            sudo apt install openmpi-bin openmpi-common mpi-default-dev
+            echo "CC=mpicc" >> $GITHUB_ENV
+            echo "FC=mpif90" >> $GITHUB_ENV
         if: (matrix.generator == 'autogen') && (matrix.parallel == 'enable')
 
       - name: Install Dependencies (Windows)
@@ -525,3 +349,4 @@ jobs:
         run: make check-install
         working-directory: ${{ runner.workspace }}/build
         if: (matrix.generator == 'autogen')
+          
