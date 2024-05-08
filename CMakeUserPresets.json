@@ -86,7 +86,7 @@
           "H5PL_VERS_MAJOR": "1",
           "H5PL_VERS_MINOR": "10",
           "H5PL_VERS_RELEASE": "11",
-	        "HDF5_ENABLE_PLUGIN_SUPPORT": "ON",
+	  "HDF5_ENABLE_PLUGIN_SUPPORT": "ON",
           "HDF5_ENABLE_LZF_SUPPORT": "ON",
           "HDF5_ENABLE_BSHUF_SUPPORT": "ON",
           "HDF5_ENABLE_LZ4_SUPPORT": "ON",
@@ -100,7 +100,7 @@
           "ENABLE_LZ4": "ON",
           "ENABLE_BSHUF": "ON",
           "ENABLE_ZSTD": "ON",
-          "ENABLE_BZIP2": "ON",
+          "ENABLE_BZIP2": "ON"
       }
     },
     {
@@ -140,8 +140,6 @@
           "value": ""
         },
         "CMAKE_PLATFORM_NO_VERSIONED_SONAME": "ON",
-        "HDF5_USE_GNU_DIRS": "OFF",
-        "CMAKE_INSTALL_LIBDIR": "lib",
         "HDF5_NO_PACKAGES": "OFF"
       }
     },
