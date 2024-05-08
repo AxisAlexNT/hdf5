@@ -164,23 +164,23 @@ jobs:
           #
           # We could also build with the Autotools via brew installing them,
           # but that seems unnecessary
-          # - name: "MacOS Clang CMake"
-          #   os: macos-13
-          #   cpp: ON
-          #   fortran: OFF
-          #   java: ON
-          #   docs: OFF
-          #   libaecfc: ON
-          #   localaec: OFF
-          #   zlibfc: ON
-          #   localzlib: OFF
-          #   parallel: OFF
-          #   mirror_vfd: ON
-          #   direct_vfd: OFF
-          #   ros3_vfd: OFF
-          #   toolchain: "config/toolchain/clang.cmake"
-          #   generator: "-G Ninja"
-          #   run_tests: true
+          - name: "MacOS Clang CMake"
+            os: macos-13
+            cpp: ON
+            fortran: OFF
+            java: ON
+            docs: OFF
+            libaecfc: ON
+            localaec: OFF
+            zlibfc: ON
+            localzlib: OFF
+            parallel: OFF
+            mirror_vfd: ON
+            direct_vfd: OFF
+            ros3_vfd: OFF
+            toolchain: "config/toolchain/clang.cmake"
+            generator: "-G Ninja"
+            run_tests: true
 
 
           #
