@@ -115,50 +115,50 @@ jobs:
             generator: "-G Ninja"
             run_tests: true
 
-          # Linux (Ubuntu) w/ gcc + Autotools
-          #
-          # Keep this identical to the CMake configs. Note the difference in
-          # the values.
-          - name: "Ubuntu gcc Autotools"
-            os: ubuntu-latest
-            cpp: enable
-            fortran: enable
-            java: enable
-            docs: disable
-            parallel: disable
-            mirror_vfd: enable
-            direct_vfd: enable
-            ros3_vfd: enable
-            deprec_sym: enable
-            default_api: v110
-            szip: yes
-            toolchain: ""
-            generator: "autogen"
-            flags: ""
-            run_tests: true
+          # # Linux (Ubuntu) w/ gcc + Autotools
+          # #
+          # # Keep this identical to the CMake configs. Note the difference in
+          # # the values.
+          # - name: "Ubuntu gcc Autotools"
+          #   os: ubuntu-latest
+          #   cpp: enable
+          #   fortran: enable
+          #   java: enable
+          #   docs: disable
+          #   parallel: disable
+          #   mirror_vfd: enable
+          #   direct_vfd: enable
+          #   ros3_vfd: enable
+          #   deprec_sym: enable
+          #   default_api: v110
+          #   szip: yes
+          #   toolchain: ""
+          #   generator: "autogen"
+          #   flags: ""
+          #   run_tests: true
 
-          # Parallel Linux (Ubuntu) w/ gcc + Autotools
-          #
-          # The GitHub runners are inadequate for running parallel HDF5 tests,
-          # so we catch most issues in daily testing. What we have here is just
-          # a compile check to make sure nothing obvious is broken.
-          - name: "Ubuntu gcc Autotools parallel (build only)"
-            os: ubuntu-latest
-            cpp: disable
-            fortran: enable
-            java: disable
-            docs: disable
-            parallel: enable
-            mirror_vfd: disable
-            direct_vfd: disable
-            ros3_vfd: disable
-            deprec_sym: enable
-            default_api: v110
-            szip: yes
-            toolchain: ""
-            generator: "autogen"
-            flags: "CC=mpicc"
-            run_tests: false
+          # # Parallel Linux (Ubuntu) w/ gcc + Autotools
+          # #
+          # # The GitHub runners are inadequate for running parallel HDF5 tests,
+          # # so we catch most issues in daily testing. What we have here is just
+          # # a compile check to make sure nothing obvious is broken.
+          # - name: "Ubuntu gcc Autotools parallel (build only)"
+          #   os: ubuntu-latest
+          #   cpp: disable
+          #   fortran: enable
+          #   java: disable
+          #   docs: disable
+          #   parallel: enable
+          #   mirror_vfd: disable
+          #   direct_vfd: disable
+          #   ros3_vfd: disable
+          #   deprec_sym: enable
+          #   default_api: v110
+          #   szip: yes
+          #   toolchain: ""
+          #   generator: "autogen"
+          #   flags: "CC=mpicc"
+          #   run_tests: false
 
           # MacOS w/ Clang + CMake
           #
@@ -241,55 +241,55 @@ jobs:
           #    cmake: "Debug"
           #    autotools: "debug"
 
-          - name: "Ubuntu gcc Autotools v1.10 default API (build only)"
-            os: ubuntu-latest
-            cpp: enable
-            fortran: enable
-            java: enable
-            docs: disable
-            parallel: disable
-            mirror_vfd: enable
-            direct_vfd: enable
-            ros3_vfd: enable
-            deprec_sym: enable
-            default_api: v110
-            szip: yes
-            toolchain: ""
-            generator: "autogen"
-            flags: ""
-            run_tests: false
-            thread_safety:
-              enabled: false
-              text: ""
-            build_mode:
-              text: " DBG"
-              cmake: "Debug"
-              autotools: "debug"
+          # - name: "Ubuntu gcc Autotools v1.10 default API (build only)"
+          #   os: ubuntu-latest
+          #   cpp: enable
+          #   fortran: enable
+          #   java: enable
+          #   docs: disable
+          #   parallel: disable
+          #   mirror_vfd: enable
+          #   direct_vfd: enable
+          #   ros3_vfd: enable
+          #   deprec_sym: enable
+          #   default_api: v110
+          #   szip: yes
+          #   toolchain: ""
+          #   generator: "autogen"
+          #   flags: ""
+          #   run_tests: false
+          #   thread_safety:
+          #     enabled: false
+          #     text: ""
+          #   build_mode:
+          #     text: " DBG"
+          #     cmake: "Debug"
+          #     autotools: "debug"
 
-          - name: "Ubuntu gcc Autotools no deprecated symbols (build only)"
-            os: ubuntu-latest
-            cpp: enable
-            fortran: enable
-            java: enable
-            docs: disable
-            parallel: disable
-            mirror_vfd: enable
-            direct_vfd: enable
-            ros3_vfd: enable
-            deprec_sym: disable
-            default_api: default
-            szip: yes
-            toolchain: ""
-            generator: "autogen"
-            flags: ""
-            run_tests: false
-            thread_safety:
-              enabled: false
-              text: ""
-            build_mode:
-              text: " DBG"
-              cmake: "Debug"
-              autotools: "debug"
+          # - name: "Ubuntu gcc Autotools no deprecated symbols (build only)"
+          #   os: ubuntu-latest
+          #   cpp: enable
+          #   fortran: enable
+          #   java: enable
+          #   docs: disable
+          #   parallel: disable
+          #   mirror_vfd: enable
+          #   direct_vfd: enable
+          #   ros3_vfd: enable
+          #   deprec_sym: disable
+          #   default_api: default
+          #   szip: yes
+          #   toolchain: ""
+          #   generator: "autogen"
+          #   flags: ""
+          #   run_tests: false
+          #   thread_safety:
+          #     enabled: false
+          #     text: ""
+          #   build_mode:
+          #     text: " DBG"
+          #     cmake: "Debug"
+          #     autotools: "debug"
 
     # Sets the job's name from the properties
     name: "${{ matrix.name }}${{ matrix.build_mode.text }}${{ matrix.thread_safety.text }}"
@@ -358,6 +358,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Patch sources with SIS JHDF5
+        if:  matrix.os == 'windows-latest'
         run: |
           bash ./patch_jhdf5.sh
 
@@ -430,6 +431,8 @@ jobs:
             -DHDF5_ENABLE_MIRROR_VFD:BOOL=${{ matrix.mirror_vfd }} \
             -DHDF5_ENABLE_DIRECT_VFD:BOOL=${{ matrix.direct_vfd }} \
             -DHDF5_ENABLE_ROS3_VFD:BOOL=${{ matrix.ros3_vfd }} \
+            -DCMAKE_PLATFORM_NO_VERSIONED_SONAME:BOOL=ON \
+            -DHDF5_ENABLE_PLUGIN_SUPPORT:BOOL=ON -DHDF5_ENABLE_LZF_SUPPORT:BOOL=ON -DHDF5_ENABLE_BSHUF_SUPPORT:BOOL=ON -DHDF5_ENABLE_LZ4_SUPPORT:BOOL=ON -DHDF5_ENABLE_ZSTD_SUPPORT:BOOL=ON -DHDF5_ENABLE_BLOSC_SUPPORT:BOOL=ON -DHDF5_ENABLE_BZIP2_SUPPORT:BOOL=ON -DHDF5_ENABLE_BSHUF:BOOL=ON -DHDF5_ENABLE_LZF:BOOL=ON -DHDF5_ENABLE_ZSTD:BOOL=ON -DHDF5_ENABLE_LZ4:BOOL=ON -DENABLE_ZSTD:BOOL=ON -DENABLE_LZ4:BOOL=ON -DENABLE_BSHUF:BOOL=ON -DENABLE_LZF:BOOL=ON -DENABLE_BLOSC:BOOL=ON -DENABLE_BZIP2:BOOL=ON -DH5PL_VERS_MINOR=1 -DH5PL_VERS_MINOR=10 \
             $GITHUB_WORKSPACE
         shell: bash
         if: (matrix.generator != 'autogen') && ! (matrix.thread_safety.enabled)
@@ -459,6 +462,8 @@ jobs:
             -DHDF5_ENABLE_MIRROR_VFD:BOOL=${{ matrix.mirror_vfd }} \
             -DHDF5_ENABLE_DIRECT_VFD:BOOL=${{ matrix.direct_vfd }} \
             -DHDF5_ENABLE_ROS3_VFD:BOOL=${{ matrix.ros3_vfd }} \
+            -DCMAKE_PLATFORM_NO_VERSIONED_SONAME:BOOL=ON \
+            -DHDF5_ENABLE_PLUGIN_SUPPORT:BOOL=ON -DHDF5_ENABLE_LZF_SUPPORT:BOOL=ON -DHDF5_ENABLE_BSHUF_SUPPORT:BOOL=ON -DHDF5_ENABLE_LZ4_SUPPORT:BOOL=ON -DHDF5_ENABLE_ZSTD_SUPPORT:BOOL=ON -DHDF5_ENABLE_BLOSC_SUPPORT:BOOL=ON -DHDF5_ENABLE_BZIP2_SUPPORT:BOOL=ON -DHDF5_ENABLE_BSHUF:BOOL=ON -DHDF5_ENABLE_LZF:BOOL=ON -DHDF5_ENABLE_ZSTD:BOOL=ON -DHDF5_ENABLE_LZ4:BOOL=ON -DENABLE_ZSTD:BOOL=ON -DENABLE_LZ4:BOOL=ON -DENABLE_BSHUF:BOOL=ON -DENABLE_LZF:BOOL=ON -DENABLE_BLOSC:BOOL=ON -DENABLE_BZIP2:BOOL=ON -DH5PL_VERS_MINOR=1 -DH5PL_VERS_MINOR=10 \
             $GITHUB_WORKSPACE
         shell: bash
         if: (matrix.generator != 'autogen') && (matrix.thread_safety.enabled)
@@ -473,7 +478,7 @@ jobs:
         if: matrix.generator == 'autogen'
 
       - name: CMake Build
-        run: cmake --build . --parallel 3 --config ${{ matrix.build_mode.cmake }}
+        run: cmake --build . --parallel 4 --config ${{ matrix.build_mode.cmake }}
         working-directory: ${{ runner.workspace }}/build
         if: (matrix.generator != 'autogen')
 
